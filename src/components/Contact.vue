@@ -2,24 +2,43 @@
     <div class="container">
     <form>
     <div>
-    <input placeholder="Email" type="email" />
+    <input @input="email" placeholder="Email" type="email" />
     </div>
     <div>
-    <input placeholder="Subject" type="text" />
+    <input @input="subject" placeholder="Subject" type="text" />
     </div>
     <div>
-    <textarea rows="8" cols="50" placeholder="Message.."></textarea>
+    <textarea @input="message" rows="8" cols="50" placeholder="Message.."></textarea>
     </div>
     <div>
     <input id="submit" type="submit" value="Send"/>
     </div>
     </form>
+    <br/>
     </div>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex';
 export default {
-    name:'Contact'
+    name:'Contact',
+    computed:mapGetters(['getemail','getsubject','getmessage']),
+    methods:{
+        ...mapActions(['changeemail','changesubject','changemessage']),
+        email(e){
+       this.changeemail(e.target.value)
+        },
+        subject(e){
+       this.changesubject(e.target.value);
+        },
+        message(e){
+        this.changemessage(e.target.value);
+        }
+      ,
+      sendtomail(){
+          
+      }
+    }
 }
 </script>
 <style scoped>
