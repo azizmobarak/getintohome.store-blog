@@ -2,13 +2,13 @@
     <main>
     <form>
     <div>
-    <input placeholder="Email" type="email" />
+    <input @input="changeemail" placeholder="Email" type="email" />
     </div>
     <div>
-    <input placeholder="Password" type="password" />
+    <input @input="changepassword" placeholder="Password" type="password" />
     </div>
     <div>
-    <input id="btnlogin" value="Login" type="submit" />
+    <input @click="senddata" id="btnlogin" value="Login" type="submit" />
     </div>
     <p>You don't have an account yet? <a href="/register">create one</a></p>
     <p>forgot password ? <a href="#">recover it now</a></p>
@@ -16,8 +16,18 @@
     </main>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
 export default {
-    name:"Login"
+    name:"Login",
+    computed:mapGetters(['getemail','getpassword']),
+    methods:{
+        ...mapActions(['changeemail','changepassword']),
+        //verify the data from database
+       senddata(e){
+    e.preventDefault();
+    
+       }
+    }
 }
 </script>
 <style scoped>

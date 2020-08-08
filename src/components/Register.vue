@@ -2,27 +2,35 @@
     <main>
     <form>
     <div>
-    <input placeholder="Email" type="email" />
+    <input @input="changeemail" placeholder="Email" type="email" />
     </div>
     <div>
-    <input placeholder="Full name" type="text" />
+    <input @input="changename" placeholder="Full name" type="text" />
     </div>
     <div>
     <input placeholder="Password" type="password" />
     </div>
     <div>
-    <input placeholder="Confirm password" type="password" />
+    <input @input="changepassword" placeholder="Confirm password" type="password" />
     </div>
     <div>
-    <input id="btnlogin" value="Create Account" type="submit" />
+    <input @click="sendata" id="btnlogin" value="Create Account" type="submit" />
     </div>
     <p>You have an account? <a href="/login">Login</a></p>
     </form>
     </main>
 </template>
 <script>
+import {mapGetters, mapActions} from "vuex";
 export default {
-    name:"Register"
+    name:"Register",
+    computed:mapGetters(['getemail','getname',"getpassword"]),
+    methods:{
+        ...mapActions(['changeemail','changepassword','changename']),
+        sendata(e){
+           e.preventDefault();
+        }
+    }
 }
 </script>
 <style scoped>
