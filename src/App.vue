@@ -75,7 +75,8 @@ export default {
   width:99vw;
   height: 100vh;
   background-image: url('./assets/back.jpg');
-  background-size: cover;
+  background-size:cover;
+  background-repeat: no-repeat;
   z-index: -1;
 }
 #btncenter:hover{
@@ -92,7 +93,6 @@ export default {
   align-items: center;
   justify-content: center;
   color: aliceblue;
-  width: 90%;
 }
 #div-container{
   margin-top: 50vh;

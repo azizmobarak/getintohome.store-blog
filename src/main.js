@@ -4,12 +4,16 @@ import Vuerouter from 'vue-router';
 import Home from './components/Home.vue';
 import Contact from './components/Contact.vue';
 import store from './store';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
 
 Vue.use(Vuerouter);
 
 const routes = [
     { path: "/", component: Home },
-    { path: '/contact', component: Contact }
+    { path: '/contact', component: Contact },
+    { path: "/login", component: Login },
+    { path: "/register", component: Register }
 ]
 
 const router = new Vuerouter({

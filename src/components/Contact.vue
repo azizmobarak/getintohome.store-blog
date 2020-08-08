@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-    <form>
+    <form @submit="sendtomail">
     <div>
     <input @input="email" placeholder="Email" type="email" />
     </div>
@@ -35,8 +35,26 @@ export default {
         this.changemessage(e.target.value);
         }
       ,
-      sendtomail(){
-          
+      sendtomail(e){
+          e.preventDefault();
+         fetch('https://apimessagestomail.herokuapp.com/messages',{
+              method:"POST",
+              body:JSON.stringify({
+                  email : this.getemail,
+                  question:this.getsubject,
+                  message : this.getmessage
+              })
+          })
+           .then(response=>response.json())
+           .then(data=>
+           {
+               if(data.status=="OK"){
+                   alert("Message sent succefuly,thanks , we will reply soon :)")
+               }else{
+                   alert("Oops!, try again")
+               }
+           }
+           );
       }
     }
 }
