@@ -10,7 +10,7 @@
    <li><a href="/contact">contact</a></li>
    <li><a href="/login">Login</a></li>
    <li><a href="/register">Register</a></li>
-   <li><button>Join!</button></li>
+   <li><button>{{ this.getbtnname }}</button></li>
    </ul>
    </div>
    <div id="div-menu">
@@ -22,7 +22,7 @@
    <li><a href="contact">contact</a></li>
    <li><a href="contact">test1</a></li>
    <li><a href="contact">test2</a></li>
-   <li><button>Join!</button></li>
+   <li><button>{{ this.getbtnname }}</button></li>
    </ul>
    </div>
    <br/>
@@ -44,9 +44,9 @@ import {mapGetters,mapActions} from 'vuex';
 
 export default {
   name: 'App',
-  computed:mapGetters(['getlocation']),
+  computed:mapGetters(['getlocation','getbtnname']),
   methods:{
-  ... mapActions(['locationname'])
+  ... mapActions(['locationname',"changebtnname"])
     ,
     showmenu:()=>{
       var menu = document.getElementById('div-menu-list');
@@ -59,6 +59,7 @@ export default {
   },
   created() {
    this.locationname();
+  this.changebtnname();
   },
 }
 

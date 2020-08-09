@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import location from './modules/loacation';
 import contact from './modules/contact';
 import user from './modules/user';
+import blog from './modules/blog';
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
     modules: {
         location,
         contact,
-        user
+        user,
+        blog
     }
 });

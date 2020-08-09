@@ -1,8 +1,10 @@
 const state = {
-    location: "Home"
+    location: "Home",
+    btnname: ""
 }
 const getters = {
     getlocation: state => state.location,
+    getbtnname: state => state.btnname
 }
 const actions = {
     async locationname({ commit }) {
@@ -18,15 +20,28 @@ const actions = {
                 if (directory === "register") {
                     directory = "Welcome to your App , let's create New Account to discover more!"
                 } else {
-                    directory = "Welcome to GetIntoHome Blog site!"
+                    if (directory === "blog") {
+                        directory = "blog";
+                    } else {
+                        directory = "Welcome to GetIntoHome Blog site!"
+                    }
                 }
+
             }
         }
         commit('setlocation', directory);
     },
+    changebtnname({ commit }) {
+        if (state.location === "blog") {
+            commit("setbtnname", "Logout!");
+        } else {
+            commit("setbtnname", "Join!")
+        }
+    }
 }
 const mutations = {
     setlocation: (state, location) => state.location = location,
+    setbtnname: (state, name) => state.btnname = name,
 }
 
 export default ({
