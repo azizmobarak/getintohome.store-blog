@@ -87,7 +87,7 @@ export default {
  margin-left: -10px;
  background-color:rgb(240, 157, 4);
  font-size: 4vh;
- width: 15vw;
+ width: 20vw;
  height: 40px;
 }
 #title{
@@ -129,7 +129,7 @@ button{
   background-color: rgb(12, 73, 12);
   color:white;
   border-radius: 5%;
-  width:10vw;
+  width:15vw;
   border:0px white;
   height: 30px;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -149,7 +149,17 @@ button:hover{
     position: absolute;
     margin: 35px 30px 0;
   }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
+  button{
+    margin-left: 260px;
+  }
+  header{
+    width:100vw
+  }
+  #showsomebtn{
+    background-size: cover;
+    width: 145vw;
+  }
    #div-list{
     display: none;
   }

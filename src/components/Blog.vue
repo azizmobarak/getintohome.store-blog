@@ -2,10 +2,10 @@
     <main>
     <div v-for="e in this.getlist" :key="e.name">
     <div class="div-name-picture">
-    <img :src="e.picture"/>
+    <img :src="e.image"/>
     <p>{{ e.name }}</p>
     </div>
-    <p>text : {{ e.text }}</p>
+    <a :href="e.url"><p>{{ e.title }}</p></a>
     </div>
     </main>
 </template>
@@ -58,5 +58,11 @@ main div{
 }
 main div:hover{
     background-color: rgb(245, 202, 121);
+}
+
+@media only screen and (max-width:600px){
+    main div{
+       grid-template-columns: min-content;
+    }
 }
 </style>
