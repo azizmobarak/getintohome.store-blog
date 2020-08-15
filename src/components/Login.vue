@@ -25,7 +25,18 @@ export default {
         //verify the data from database
        senddata(e){
     e.preventDefault();
-    
+        fetch('http://localhost:2222/login',{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                email:this.getemail,
+                password:this.getpassword
+            })
+        }).then(res=>res.json())
+          .then(data=>console.log(data))
+          .catch(e=>console.log(e));
        }
     }
 }

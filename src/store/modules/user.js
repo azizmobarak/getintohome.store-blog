@@ -17,7 +17,7 @@ const actions = {
     },
     changename({ commit }, e) {
         commit('setname', e.target.value);
-    },
+    }
 }
 const mutations = {
     setemail: (state, e) => state.email = e,

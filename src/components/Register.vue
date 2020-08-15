@@ -1,6 +1,11 @@
 <template>
     <main>
+    <p :v-if="message!==null" >
+    </p>
     <form>
+    <div style="color:red;font-size:12px">
+     {{ this.getmessage }}
+    </div>
     <div>
     <input @input="changeemail" placeholder="Email" type="email" />
     </div>
@@ -24,13 +29,32 @@
 import {mapGetters, mapActions} from "vuex";
 export default {
     name:"Register",
-    computed:mapGetters(['getemail','getname',"getpassword"]),
+    computed:mapGetters(['getemail','getname',"getpassword","getmessage"]),
     methods:{
-        ...mapActions(['changeemail','changepassword','changename']),
-        sendata(e){
+        ...mapActions(['changeemail','changepassword','changename',"changemessage"]),
+       async sendata(e){
+            var date = new Date();
            e.preventDefault();
-        }
-    }
+          return  await fetch('http://localhost:2222/register',{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body:JSON.stringify({
+                email:this.getemail,
+             name:this.getname,
+             password:this.getpassword,
+             date:date.getMonth()+"/"+date.getDay()+"/"+date.getFullYear(),
+            })
+        }).then(res=>res.json())
+          .then(data=>this.changemessage(data.success))
+          .catch(e=>console.log(e));
+    },
+  cerated(){
+      this.changemessage("");
+  }
+}
+
 }
 </script>
 <style scoped>
