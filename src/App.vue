@@ -9,7 +9,6 @@
    <li><a href="/">home</a></li>
    <li><a href="/contact">contact</a></li>
    <li><a href="/login">Login</a></li>
-   <li><a href="/register">Register</a></li>
    <li><button @click="logout">{{ this.getbtnname }}</button></li>
    </ul>
    </div>
@@ -19,9 +18,8 @@
    <div id="div-menu-list">
     <ul>
    <li><a href="/">home</a></li>
-   <li><a href="contact">contact</a></li>
-   <li><a href="contact">test1</a></li>
-   <li><a href="contact">test2</a></li>
+   <li><a href="/contact">contact</a></li>
+   <li><a href="/login">Login</a></li>
    <li><button @click="logout">{{ this.getbtnname }}</button></li>
    </ul>
    </div>
@@ -30,7 +28,7 @@
     <div id="showsomebtn">
     <div id="div-container">
     <h1 id="title">{{ getlocation }}</h1><br/>
-    <button id="btncenter">Start</button>
+    <a href="/Register"><button id="btncenter">Start</button></a>
     </div>
     </div>
    <br/><br/>
@@ -63,13 +61,17 @@ export default {
     if(this.getbtnname==="Logout!"){
        this.$session.destroy();
        window.location.reload();
+     }else{
+  this.$router.push({name:"register"})
      }
     }
   },
   created() {
-   this.locationname();
-  this.changebtnname();
-  },
+   setTimeout(() => {
+     this.locationname();
+     this.changebtnname();
+   }, 1000);
+  }
 }
 
 </script>

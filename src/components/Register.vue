@@ -34,6 +34,14 @@ Vue.use(Vuesession);
 
 export default {
     name:"Register",
+     beforeCreate(){
+     if(this.$session.exists()){
+            this.$router.push({name:"blog"})
+     }else{
+      this.$router.push({name:"register"})
+     }
+     this.changemessage('');
+    },
     computed:mapGetters(['getemail','getname',"getpassword","getmessage"]),
     methods:{
         ...mapActions(['changeemail','changepassword','changename',"changemessage"]),

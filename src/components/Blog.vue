@@ -1,5 +1,8 @@
 <template>
     <main>
+     <div v-if="this.getlist.length<1">
+    Please wait a few second to load
+    </div>
     <div v-for="e in this.getlist" :key="e.name">
     <div class="div-name-picture">
     <img :src="e.image"/>
@@ -18,20 +21,23 @@ Vue.use(Vuesession);
 
 export default {
 name:'Blog',
-computed:mapGetters(['getlist']) ,
+computed:mapGetters(['getlist']),
 methods:{
-    ...mapActions(['addtolist',"changemessage"])
+    ...mapActions(['addtolist',"changemessage"]),
 },
  beforeCreate(){
      if(!this.$session.exists()){
             this.$router.push({name:"home"})
      }
-    this.addtolist();
-    }
+    },
+created() {
+     this.addtolist();
+},
 }
 </script>
 <style scoped>
-main{
+
+main {
     margin: -100px 2vw 10px;
     display: grid;
     grid-template-columns: auto auto auto;

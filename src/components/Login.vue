@@ -28,6 +28,14 @@ Vue.use(Vuesession);
 
 export default {
     name:"Login",
+     beforeCreate(){
+     if(this.$session.exists()){
+            this.$router.push({name:"blog"})
+     }else{
+      this.$router.push({name:"login"})
+     }
+     this.changemessage('');
+    },
     computed:mapGetters(['getemail','getpassword','getmessage']),
     methods:{
         ...mapActions(['changeemail','changepassword','changemessage']),
@@ -50,24 +58,17 @@ export default {
                 console.log(data);
               this.$session.start();
               this.$session.set("access_token","success");
-              console.log("session "+this.$session.exist())
+              console.log("session "+this.$session.exists())
               window.location.reload();
           }else{
-               return this.changemessage(data.message)
+                this.changemessage(data.message)
           }
           })
           .catch(e=>console.log(e));
          
        }
     },
-     beforeCreate(){
-     if(this.$session.exists()){
-            this.$router.push({name:"blog"})
-     }else{
-      this.$router.push({name:"login"})
-     }
-     this.changemessage('');
-    }
+ 
    
 }
 </script>
