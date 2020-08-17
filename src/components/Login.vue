@@ -1,6 +1,9 @@
 <template>
     <main>
-    <form>
+    <form @submit="senddata">
+    <div>
+     <p v-if="this.getmessage!=='success'" style="color:red;font-size:14px;">{{ this.getmessage }}</p>
+    </div>
     <div>
     <input @input="changeemail" placeholder="Email" type="email" />
     </div>
@@ -8,7 +11,7 @@
     <input @input="changepassword" placeholder="Password" type="password" />
     </div>
     <div>
-    <input @click="senddata" id="btnlogin" value="Login" type="submit" />
+    <input id="btnlogin" value="Login" type="submit" />
     </div>
     <p>You don't have an account yet? <a href="/register">create one</a></p>
     <p>forgot password ? <a href="#">recover it now</a></p>
@@ -16,12 +19,18 @@
     </main>
 </template>
 <script>
+
 import { mapGetters, mapActions } from 'vuex';
+import Vue from "vue";
+import Vuesession from 'vue-session';
+
+Vue.use(Vuesession);
+
 export default {
     name:"Login",
-    computed:mapGetters(['getemail','getpassword']),
+    computed:mapGetters(['getemail','getpassword','getmessage']),
     methods:{
-        ...mapActions(['changeemail','changepassword']),
+        ...mapActions(['changeemail','changepassword','changemessage']),
         //verify the data from database
        senddata(e){
     e.preventDefault();
@@ -35,10 +44,31 @@ export default {
                 password:this.getpassword
             })
         }).then(res=>res.json())
-          .then(data=>console.log(data))
+          .then(data=>{
+              console.log("start")
+            if(data.message==="success"){
+                console.log(data);
+              this.$session.start();
+              this.$session.set("access_token","success");
+              console.log("session "+this.$session.exist())
+              window.location.reload();
+          }else{
+               return this.changemessage(data.message)
+          }
+          })
           .catch(e=>console.log(e));
+         
        }
+    },
+     beforeCreate(){
+     if(this.$session.exists()){
+            this.$router.push({name:"blog"})
+     }else{
+      this.$router.push({name:"login"})
+     }
+     this.changemessage('');
     }
+   
 }
 </script>
 <style scoped>

@@ -11,20 +11,23 @@
 </template>
 <script>
 import {mapGetters, mapActions} from 'vuex';
+import Vue from "vue";
+import Vuesession from 'vue-session';
+
+Vue.use(Vuesession);
+
 export default {
 name:'Blog',
 computed:mapGetters(['getlist']) ,
 methods:{
-    ...mapActions(['addtolist'])
+    ...mapActions(['addtolist',"changemessage"])
 },
-created(){
+ beforeCreate(){
+     if(!this.$session.exists()){
+            this.$router.push({name:"home"})
+     }
     this.addtolist();
-}
-,
-data(){
-    return{
     }
-}
 }
 </script>
 <style scoped>

@@ -27,6 +27,11 @@
 </template>
 <script>
 import {mapGetters, mapActions} from "vuex";
+import Vue from "vue";
+import Vuesession from 'vue-session';
+
+Vue.use(Vuesession);
+
 export default {
     name:"Register",
     computed:mapGetters(['getemail','getname',"getpassword","getmessage"]),
@@ -50,9 +55,13 @@ export default {
           .then(data=>this.changemessage(data.success))
           .catch(e=>console.log(e));
     },
-  cerated(){
-      this.changemessage("");
-  }
+  beforeCreate(){
+     if(this.$session.exist()){
+            this.$router.push({name:"blog"})
+     }else{
+      this.$router.push({name:"login"})
+     }
+    }
 }
 
 }

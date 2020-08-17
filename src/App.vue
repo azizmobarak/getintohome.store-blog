@@ -10,7 +10,7 @@
    <li><a href="/contact">contact</a></li>
    <li><a href="/login">Login</a></li>
    <li><a href="/register">Register</a></li>
-   <li><button>{{ this.getbtnname }}</button></li>
+   <li><button @click="logout">{{ this.getbtnname }}</button></li>
    </ul>
    </div>
    <div id="div-menu">
@@ -22,7 +22,7 @@
    <li><a href="contact">contact</a></li>
    <li><a href="contact">test1</a></li>
    <li><a href="contact">test2</a></li>
-   <li><button>{{ this.getbtnname }}</button></li>
+   <li><button @click="logout">{{ this.getbtnname }}</button></li>
    </ul>
    </div>
    <br/>
@@ -41,12 +41,15 @@
 <script>
 
 import {mapGetters,mapActions} from 'vuex';
+import Vue from "vue";
+import Vuesession from "vue-session";
+Vue.use(Vuesession);
 
 export default {
   name: 'App',
-  computed:mapGetters(['getlocation','getbtnname']),
+  computed:mapGetters(['getlocation','getbtnname',"getmessage"]),
   methods:{
-  ... mapActions(['locationname',"changebtnname"])
+  ... mapActions(['locationname',"changebtnname",'changemessage'])
     ,
     showmenu:()=>{
       var menu = document.getElementById('div-menu-list');
@@ -55,6 +58,12 @@ export default {
       }else{
         menu.style.display="none"
       }
+    },
+    logout(){
+    if(this.getbtnname==="Logout!"){
+       this.$session.destroy();
+       window.location.reload();
+     }
     }
   },
   created() {
